@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>从入门测试到放弃</title>
+
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <meta name="author" content="Bartek Szopka" />
+    <!--
+
+        Impress.js doesn't depend on any external stylesheets. It adds all of the styles it needs for the
+        presentation to work.
+
+        This style below contains styles only for demo presentation. Browse it to see how impress.js
+        classes are used to style presentation steps, or how to apply fallback styles, but I don't want
+        you to use them directly in your presentation.
+
+        Be creative, build your own. We don't really want all impress.js presentations to look the same,
+        do we?
+
+        When creating your own presentation get rid of this file. Start from scratch, it's fun!
+
+    -->
+    <link href="css/impress-demo.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <style>
+      p{line-height: 1.5em;}
+      pre{
+        padding: 16px;
+        overflow: auto;
+        font-size: 85%;
+        line-height: 1.45;
+        background-color: #f7f7f7;
+        border-radius: 3px;
+        margin-bottom: 20px;
+      }
+      pre code {
+        display: inline;
+        max-width: auto;
+        padding: 0;
+        margin: 0;
+        overflow: visible;
+        line-height: inherit;
+        word-wrap: normal;
+        background-color: transparent;
+        border: 0;
+      }
+      .hljs-doctag, .hljs-string, .hljs-tag .hljs-value, .tex .hljs-formula {
+        color: #d14;
+      }
+      .hljs-regexp {color: #009926;}
+      .hljs-built_in {color: #0086b3;}
+    </style>
+</head>
+<body class="impress-not-supported">
+<div id="impress">
+    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+        <span class="try">从入门</span>
+        <h1>测试<sup>*</sup></h1>
+        <span class="footnote"><sup>*</sup> 到放弃</span>
+    </div>
+    <div id="bored" class="step slide" data-x="-1000" data-y="-1500">
+        <p>为什么要做单元测试?</p>
+        <br/>
+        <p>1. 写单元测试时，可以顺便检查一下复杂代码本身的业务无逻辑是否会有问题，减少因为修复bug时的误操作，导致产生新的bug。</p>
+        <p>2. 一次编写多次运行，而不需要每次去做黑盒测试。</p>
+        <p>3. 多人协作是不用担心别人会轻易改坏你的代码。</p>
+        <p>4. 交接代码时，一份拥有单元测试的代码，可以让别人对于你的源代码能有更好的理解。</p>
+        <p>5. 重构代码，一直会担心是否会把功能改漏，或者改坏，这个时候如果原先的代码有一份单测代码，就可以随意重构了。</p>
+        <p>6. 提升对于自己的代码的自信。</p>
+        <p>7. 如果是一份开源组件，提升别人对于使用你组件的信赖。</p>
+    </div>
+    <div class="step slide" data-x="0" data-y="-1500">
+      <p><strong>测试框架</strong> </p>
+      <br/><br/><br/>
+      <p>1. Mocha: 可以同时在node环境和browser环境运行</p><br/>
+      <p>2. Jasmine: BDD风格的测试框架</p><br/>
+      <p>3. Karma: 基于真实的浏览器</p>
+    </div>
+    <div class="step slide" data-x="1000" data-y="-1500">
+      <p><b>断言库</b></p>
+      <br/><br/>
+      <p>断言库有两种风格（TDD, BDD）, 例如：</p>
+      <p>chai同时支持两种，should.js和expect.js则是BDD风格的库</p><br/>
+      <p><b>TDD: </b>测试驱动开发，大概的理念就是先写测试用例，以此为基础再进行实际的功能开发。这种类型，由于业务复杂度和工作时间成本的问题，并不太能坚持做到。但是在编写组件，工具库时还是可以使用的，以这种方式编写的代码，会注重api的设计。</p>
+      <p><b>BDD: </b>行为驱动测试，要求更多人员参与到开发中，鼓励开发者，QA，相关业务人员一起协作完成。</p>
+    </div>
+    <div id="its" class="step" data-x="850" data-y="3000" data-z="100" data-rotate="90" data-scale="4">
+      <div style="transform: scale(1.4)">
+        <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/9B2627AE30AF4388836528ECAEFD4984/2557" alt="">
+        <p>左图即为BDD风格，有图为TDD风格。</p>
+      </div>
+    </div>
+    <div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
+      <p>覆盖率测试工具</p>
+      <p>istanbul</p>
+    </div>
+
+    <div class="step" data-x="3500" data-y="2100" data-rotate="180">
+      <p><strong>Jest</strong></p>
+      <p style="font-size:30px;">
+        是facebook出品的一个测试框架，自身拥有断言库，不需要额外集成，自身依赖了istanbul，
+        所以覆盖率测试工具也不需要额外集成，是一个前期配置成本较低的测试框架。
+        配合airbnb出品的react测试工具enzyme,
+        基本能满足大多数的react测试需求。
+      </p>
+    </div>
+
+    <div id="step" class="step slide" data-x="5500" data-y="-850" data-z="300" data-rotate="270" data-scale="2">
+      <p>安装所需依赖包</p><br/><br/>
+      <p>1. Jest: facebook出品的单元测试框架</p>
+      <p>2. babel-jest: 为了使用babel需要增加的插件</p>
+      <p>3. babel-preset-env： babel-plugin-transform-es2015-modules-commonjs 这两个插件配合使用，指定test环境下，可以将es2015转换成commonjs以便代码被jest识别</p>
+      <p>4. enzyme：是一个专门为了测试react的测试工具，他的api的使用方式很接近jquery，所以学习成本非常低</p>
+      <p>5. react-test-renderer： 是enzyme操作react的依赖库</p>
+    </div>
+
+    <div class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+        <p><strong>设置测试文件夹</strong></p>
+        <p>
+          在根目录设置一个`__test__`文件夹,
+          jest会自动读取这个文件架下的js文件进行单元测试,
+        </p>
+        <p>
+          通常这个文件夹下的测试脚本会和所要测试的源码脚本同名，
+          但后缀会是`.test.js`或者`.spec.js`,如`index.js`对应的测试脚本就应该是`index.test.js`。
+        </p>
+    </div>
+
+    <div class="step" data-x="6000" data-y="4000" data-scale="2">
+        <p>编写一个简单的测试用例</p>
+        <pre data-source-line="106">
+          <code class="hljs"><span class="hljs-regexp">//</span> simple.js
+          <span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-string">'Hello FDT'</span>;</code>
+        </pre>
+    </div>
+
+    <div class="step" data-x="5000" data-y="8000" data-scale="2">
+        <pre data-source-line="113"><code class="hljs"><span class="hljs-regexp">//</span> simple.test.js
+
+import simple from <span class="hljs-string">'../src/simple'</span>;
+
+describe(<span class="hljs-string">'第一条测试用例'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  test(<span class="hljs-string">'欢迎来到FDT'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    expect(simple()).toEqual(<span class="hljs-string">'Hello FDT'</span>);
+  });
+});</code></pre>
+    </div>
+
+    <div class="step" data-x="9000" data-y="5000" data-z="100" data-rotate="90" data-scale="4">
+      <div style="transform: scale(1.4)">
+        <p>执行前面定义的test命令即可得到如下结果：</p>
+        <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/A0C5F10AF63B48CDBF098170AF8B505F/2652" alt="">
+      </div>
+    </div>
+
+    <div class="step" data-x="5000" data-y="6000" data-rotate="90" data-scale="4">
+      <p>然后我们假设自己对于源码做了误修改,不小心加了一个s</p>
+      <pre data-source-line="130"><code class="hljs"><span class="hljs-regexp">//</span> simple.js
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-string">'Hello FDTs'</span>;</code></pre>
+    </div>
+
+    <div class="step" data-x="2950" data-y="7000" data-rotate="90" data-scale="4">
+      <p>那么运行后的结果：</p>
+      <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/4E718A8146F3436F9C085693710E68A1/2662" alt="">
+      <p>很好，我再也不用担心自己会因为误操作弄坏自己的代码了。</p>
+    </div>
+
+    <div id="its-in-3d" class="step its-in-3d cude" data-x="10000" data-y="100" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2" style="opacity:1;">
+        <p><strong>针对react组件进行测试</strong></p>
+        <pre data-source-line="144" style="font-size:19px;"><code class="hljs"><span class="hljs-comment">// index.js</span>
+        <span class="hljs-keyword">import</span> <span class="hljs-type">React</span> from <span class="hljs-symbol">'reac</span>t';
+        const <span class="hljs-type">ENTER_KEY</span> = <span class="hljs-number">13</span>;
+        let count = <span class="hljs-number">1</span>;
+        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TodoApp</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> {</span>
+            <span class="hljs-comment">// ...事件的实现</span>
+            <span class="hljs-keyword">return</span> (
+              &lt;div className=<span class="hljs-string">"todoapp"</span>&gt;
+                &lt;header className=<span class="hljs-string">"header"</span>&gt;
+                  &lt;h1&gt;todos&lt;/h1&gt;
+                  &lt;input
+                    className=<span class="hljs-string">"new-todo"</span>
+                    onChange={<span class="hljs-keyword">this</span>.handleChange}
+                    onKeyDown={<span class="hljs-keyword">this</span>.handleNewTodoKeyDown}
+                    placeholder=<span class="hljs-string">"What needs to be done?"</span>
+                    ref={ipt =&gt; (<span class="hljs-keyword">this</span>.ipt = ipt)}
+                    <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"text"</span>
+                  /&gt;
+                &lt;/header&gt;
+                &lt;section className=<span class="hljs-string">"main"</span>&gt;
+                  &lt;ul className=<span class="hljs-string">"todo-list"</span>&gt;
+                    {<span class="hljs-keyword">this</span>.renderList()}
+                  &lt;/ul&gt;
+                &lt;/section&gt;
+              &lt;/div&gt;
+            );
+          }
+        }</code></pre>
+    </div>
+
+    <div class="step its-in-3d cude" data-x="10200" data-y="1400" data-z="-400" data-rotate-x="40" data-rotate-y="0" data-rotate-z="-10" data-scale="2" style="opacity:1;">
+      <p>大概的逻辑就是监听input的keyDown事件:</p>
+      <p>1. 如果不是按下回车键，就继续输入;</p>
+      <p>2. 如果按下回车键就生成一个新条目;</p>
+      <p>3. 如果按下回车键时input的内容为空，也不会增加新条目。</p>
+    </div>
+
+    <div class="step its-in-3d cude" data-x="12000" data-y="700" data-z="-400" data-rotate-x="40" data-rotate-y="-50" data-rotate-z="-10"  data-scale="2" style="opacity:1;">
+      <p>针对这三种情况，我们可以写一个针对增加这个功能的测试套件。</p>
+      <pre data-source-line="180" style="font-size:16px;"><code class="hljs"><span class="hljs-comment">// index.test.js</span>
+
+<span class="hljs-literal">import</span> React from <span class="hljs-string">'react'</span>;
+<span class="hljs-literal">import</span> TodoApp from <span class="hljs-string">'../src/index'</span>;
+<span class="hljs-literal">import</span> {mount} from <span class="hljs-string">'enzyme'</span>;
+
+<span class="hljs-keyword">const</span> ENTER_KEY = <span class="hljs-number">13</span>;
+describe(<span class="hljs-string">'增加一个todo'</span>, () =&gt; {
+  <span class="hljs-keyword">const</span> app = mount(
+    &lt;TodoApp /&gt;
+  );
+  <span class="hljs-keyword">const</span> input = app.find(<span class="hljs-string">'.new-todo'</span>);
+  test(<span class="hljs-string">'空条目无法增加'</span>, () =&gt; {
+    input.<span class="hljs-literal">get</span>(<span class="hljs-number">0</span>).value = <span class="hljs-string">''</span>;
+    input.first().simulate(<span class="hljs-string">'keydown'</span>, {keyCode: ENTER_KEY});
+    expect(app.find(<span class="hljs-string">'.todo-list li'</span>).length).toEqual(<span class="hljs-number">0</span>);
+  });
+  test(<span class="hljs-string">'非回车操作无法增加条目'</span>, () =&gt; {
+    input.<span class="hljs-literal">get</span>(<span class="hljs-number">0</span>).value = <span class="hljs-string">''</span>;
+    input.first().simulate(<span class="hljs-string">'keydown'</span>, {keyCode: ESCAPE_KEY});
+    expect(app.find(<span class="hljs-string">'.todo-list li'</span>).length).toEqual(<span class="hljs-number">0</span>);
+  });
+  test(<span class="hljs-string">'正常增加一个todo'</span>, () =&gt; {
+    input.<span class="hljs-literal">get</span>(<span class="hljs-number">0</span>).value = <span class="hljs-string">'新增加的todo'</span>;
+    input.first().simulate(<span class="hljs-string">'keydown'</span>, {keyCode: ENTER_KEY});
+    expect(app.find(<span class="hljs-string">'.view span'</span>).text()).toEqual(<span class="hljs-string">'新增加的todo'</span>);
+  });
+});</code></pre>
+    </div>
+
+    <div class="step its-in-3d cude" data-x="10200" data-y="1500" data-z="1800" data-rotate-x="40" data-rotate-y="0" data-rotate-z="-10" data-scale="2" style="opacity:1;background: #fff;">
+      <p style="font-size: 18px;">运行测试用例的结果如下： </p>
+      <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/BAE68FD73EB34AC6BC14250871F3E2FF/2689" alt="">
+      <p style="font-size: 18px;">上面的测试用例中，我用到了enzyme的mount方法，他可以大致模拟组件真正加载的效果，本省是依赖于jsdom这个库，模拟出一个类似于类似浏览器的运行环境。而里面用到的simulates方法可以模拟用户行为，以此测试用户行为导致的ui变化。</p>
+    </div>
+
+    <div class="step" data-x="14000" data-y="200" data-rotate="90" data-scale="4">
+      <p>Jest在做UI测试的一个缺点</p>
+      <p>这边有一个缺点就是因为他是基于jsdom的，并不是真正的基于浏览器，所以还是会有些api无法实现，比如需要动态获取一个元素的宽度。如果有类似的需求，就只能选择前面提到的karma这个库了。当然大多数时候，我们并不会去做这种程度的单元测试。</p>
+    </div>
+
+    <div class="step" data-x="18000" data-y="2200" data-rotate="90" data-scale="4">
+      <p>快照测试</p>
+      <p>一个好的react组件应该是我们说的愚蠢组件，他的数据来源是来自于外接传入的props，也就是说只要props传入的数据一致，那么生成的dom就应该永远一样。基于这点，Jest还提供了一个用来测试生成dom是否一致的快照测试功能。 官方在这里给出了的很清晰的列子，就不多讲了。</p>
+    </div>
+
+    <div class="step" data-x="14000" data-y="3900" data-rotate="90" data-scale="4">
+      <p>覆盖率测试</p>
+      <p>如果需要支持覆盖率测试，只需要在jest的配置里增加配置即可</p>
+      <pre data-source-line="227"><code class="hljs"><span class="hljs-comment">// package.json</span>
+<span class="hljs-string">"jest"</span>: {
+    <span class="hljs-string">"collectCoverage"</span>: <span class="hljs-literal">true</span>
+}</code></pre>
+    </div>
+
+
+    <div class="step" data-x="19000" data-y="6300" data-rotate="90" data-scale="4">
+      <p style="font-size:30px;">运行以后的效果大致如下图所示 </p>
+      <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/F86135BF0D5744DC9E7B153770DFDAC5/2537" alt="">
+    </div>
+
+    <div class="step" data-x="14800" data-y="7300" data-rotate="90" data-scale="4">
+      <p>这里有四个指标，通过这些指标，可以量化代码覆盖情况： </p>
+      <p>statements：可执行语句执行情况</p>
+      <p>branches：分支执行情况，比如if就会产生两个分支，我们只运行了其中的一个</p>
+      <p>Functions：函数执行情况</p>
+      <p>Lines：行执行情况</p>
+    </div>
+
+    <div class="step" data-x="16200" data-y="12300" data-rotate="90" data-scale="4">
+      <p style="font-size:30px;">istanbul会同时在文件根目录下生成一个coverage的文件夹，里面的包含如下文件： </p>
+      <pre data-source-line="246" style="font-size:16px;"><code class="hljs">.
+├── clover<span class="hljs-class">.xml</span>
+├── coverage-final<span class="hljs-class">.json</span>
+├── lcov-report
+│&nbsp;&nbsp; ├── TodoFooter<span class="hljs-class">.js</span><span class="hljs-class">.html</span>
+│&nbsp;&nbsp; ├── TodoItem<span class="hljs-class">.js</span><span class="hljs-class">.html</span>
+│&nbsp;&nbsp; ├── base<span class="hljs-class">.css</span>
+│&nbsp;&nbsp; ├── index<span class="hljs-class">.html</span>
+│&nbsp;&nbsp; ├── index<span class="hljs-class">.js</span><span class="hljs-class">.html</span>
+│&nbsp;&nbsp; ├── prettify<span class="hljs-class">.css</span>
+│&nbsp;&nbsp; ├── prettify<span class="hljs-class">.js</span>
+│&nbsp;&nbsp; ├── sort-arrow-sprite<span class="hljs-class">.png</span>
+│&nbsp;&nbsp; └── sorter<span class="hljs-class">.js</span>
+└── lcov.info</code></pre>
+      <p style="font-size:30px;">在lcoe-report里的index.js.html即是对于我的源码index.js生成的覆盖率可视化文件。</p>
+    </div>
+
+    <div class="step" data-x="12600" data-y="11300" data-rotate="90" data-scale="4">
+      <p style="font-size:30px;">当我移除一些测试用例，故意让刚才的代码无法达到100%覆盖时，就可以在对应的可视化文件里看到类似下图的情况。</p>
+      <img src="http://note.youdao.com/yws/public/resource/3e2c577f204a85bddd0739ed24b72c1d/xmlnote/6E228349F2734F4F8E2CB0152E7B7047/2628" alt="">
+      <p style="font-size:30px;">红色的部分表示statements没有执行到，有个亮色标记I,则表示这一行branches没有被覆盖到。</p>
+    </div>
+
+    <div id="overview" class="step" data-x="12300" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<!--
+
+    Hint is not related to impress.js in any way.
+
+    But it can show you how to use impress.js features in creative way.
+
+    When the presentation step is shown (selected) its element gets the class of "active" and the body element
+    gets the class based on active step id `impress-on-ID` (where ID is the step's id)... It may not be
+    so clear because of all these "ids" in previous sentence, so for example when the first step (the one with
+    the id of `bored`) is active, body element gets a class of `impress-on-bored`.
+
+    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation when
+    the first step of presentation is visible for a couple of seconds.
+
+    ...
+
+    And when it comes to this piece of JavaScript below ... kids, don't do this at home ;)
+    It's just a quick and dirty workaround to get different hint text for touch devices.
+    In a real world it should be at least placed in separate JS file ... and the touch content should be
+    probably just hidden somewhere in HTML - not hard-coded in the script.
+
+    Just sayin' ;)
+
+-->
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) {
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<!--
+
+    Last, but not least.
+
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+
+    In here I just include full source of the script to make it more readable.
+
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because it should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
+
+-->
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+<!--
+
+    The `impress()` function also gives you access to the API that controls the presentation.
+
+    Just store the result of the call:
+
+        var api = impress();
+
+    and you will get three functions you can call:
+
+        `api.init()` - initializes the presentation,
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation,
+        `api.goto( stepIndex | stepElementId | stepElement, [duration] )` - moves the presentation to the step given by its index number
+                id or the DOM element; second parameter can be used to define duration of the transition in ms,
+                but it's optional - if not provided default transition duration for the presentation will be used.
+
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+
+-->
+
+</body>
+</html>
+
+<!--
+
+    Now you know more or less everything you need to build your first impress.js presentation, but before
+    you start...
+
+    Oh, you've already cloned the code from GitHub?
+
+    You have it open in text editor?
+
+    Stop right there!
+
+    That's not how you create awesome presentations. This is only a code. Implementation of the idea that
+    first needs to grow in your mind.
+
+    So if you want to build great presentation take a pencil and piece of paper. And turn off the computer.
+
+    Sketch, draw and write. Brainstorm your ideas on a paper. Try to build a mind-map of what you'd like
+    to present. It will get you closer and closer to the layout you'll build later with impress.js.
+
+    Get back to the code only when you have your presentation ready on a paper. It doesn't make sense to do
+    it earlier, because you'll only waste your time fighting with positioning of useless points.
+
+    If you think I'm crazy, please put your hands on a book called "Presentation Zen". It's all about
+    creating awesome and engaging presentations.
+
+    Think about it. 'Cause impress.js may not help you, if you have nothing interesting to say.
+
+-->
+
+<!--
+
+    Are you still reading this?
+
+    For real?
+
+    I'm impressed! Feel free to let me know that you got that far (I'm @bartaz on Twitter), 'cause I'd like
+    to congratulate you personally :)
+
+    But you don't have to do it now. Take my advice and take some time off. Make yourself a cup of coffee, tea,
+    or anything you like to drink. And raise a glass for me ;)
+
+    Cheers!
+
+-->
